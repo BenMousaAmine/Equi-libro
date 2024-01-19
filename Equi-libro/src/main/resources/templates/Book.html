@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"  >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/styleHome.css}" rel="stylesheet" />
+    <title>Book</title>
+</head>
+<body>
+<div class="home">
+    <h1 class="title">Book List</h1>
+    <table class="table">
+        <tr class="att">
+            <td>Title</td>
+            <td>Author</td>
+            <td>Home Production</td>
+            <td>Year Pubblication</td>
+            <td>Price</td>
+            <td>username</td>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td class="sotto" th:text="${book.getTitle()}">book</td>
+            <td class="sotto" th:text="${book.getAuthor()}">book</td>
+            <td class="sotto" th:text="${book.getHomeProduction()}">book</td>
+            <td class="sotto" th:text="${book.getYearPublicaton()}">book</td>
+            <td class="sotto" th:text="${book.getPrice()}">book</td>
+        </tr>
+    </table>
+    <table class="table">
+        <tr class="att">
+            <td>user name</td>
+            <td>title</td>
+        </tr>
+        <tr th:each="ub : ${userbokk}">
+            <td class="sotto" th:text="${ub.getUser().getName()}">book</td>
+            <td class="sotto" th:text="${ub.getBook().getTitle()}">book</td>
+
+        </tr>
+    </table>
+    <button class="btn"><a href="AddBook.html">Add Book</a></button>
+    <button class ="btn"> <a href="details/{title}">details </a></button>
+</div>
+</body>
+</html>

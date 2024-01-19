@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href="@{/css/styleHome.css}" rel="stylesheet" />
+</head>
+<body>
+<div  class="home">
+    <h1 class="title">Login</h1>
+    <form th:action="@{/authUser}" th:object="${user}" method="post">
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" th:field="*{userName}" /></td>
+                <td th:if="${#fields.hasErrors('userName')}" errors="*{userName}">userName length must be in [2..15]</td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" th:field="*{password}" /></td>
+                <td th:if="${#fields.hasErrors('password')}" errors="*{password}">password length must be in [8..16]</td>
+            </tr>
+        </table>
+        <button class="btn" type="submit">Login</button>
+    </form>
+</div>
+</body>
+</html>

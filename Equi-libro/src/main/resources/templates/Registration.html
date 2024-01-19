@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link th:href="@{/css/styleHome.css}" rel="stylesheet" />
+</head>
+<body>
+<div  class="home">
+    <h1 class="title">Register</h1>
+    <form th:action="@{/registeruser}" th:object="${user}" method="post">
+        <table>
+            <tr class="att">
+                <td class="sotto" >Name:</td>
+                <td class="sotto" ><input type="text" th:field="*{name}" /></td>
+                <td class="sotto" th:if="${#fields.hasErrors('name')}" errors="*{name}">Name length must be in [3..15]</td>
+            </tr >
+            <tr class="att">
+                <td class="sotto">Surname:</td>
+                <td class="sotto" ><input type="text" th:field="*{lastName}" /></td>
+                <td class="sotto" th:if="${#fields.hasErrors('lastName')}" errors="*{lastName}">Surname length  must be in [2..15]</td>
+            </tr>
+            <tr class="att">
+                <td class="sotto" >Username:</td>
+                <td class="sotto" ><input type="text" th:field="*{userName}" /></td>
+                <td class="sotto" th:if="${#fields.hasErrors('userName')}" errors="*{userName}">userName length must be in [2..15]</td>
+            </tr>
+            <tr class="att">
+                <td class="sotto" >Password:</td>
+                <td class="sotto" ><input type="password" th:field="*{password}" /></td>
+                <td class="sotto" th:if="${#fields.hasErrors('password')}" errors="*{password}">password length must be in [8..16]</td>
+            </tr>
+        </table>
+        <button class="btn" type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>

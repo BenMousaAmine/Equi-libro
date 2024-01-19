@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/styleHome.css}" rel="stylesheet" />
+
+    <title>Book</title>
+</head>
+<body>
+<div class="home">
+    <h1 class="title">Add new Book </h1>
+    <form th:action="@{/addNewBook}" th:object="${book}" method="post">
+        <table class="table" >
+            <tr >
+                <td class="att" >Title:</td>
+                <td><input type="text" th:field="*{title}" /></td>
+                <td th:if="${#fields.hasErrors('title')}" errors="*{title}">Title length must be in [5..20]</td>
+            </tr>
+            <tr >
+                <td class="att">Author:</td>
+                <td><input type="text" th:field="*{author}" /></td>
+                <td th:if="${#fields.hasErrors('author')}" errors="*{author}">Author length  must be in [5..20]</td>
+            </tr>
+            <tr >
+                <td class="att">Home Production:</td>
+                <td><input type="text" th:field="*{homeProduction}" /></td>
+                <td th:if="${#fields.hasErrors('homeProduction')}" errors="*{homeProduction}">Home Production length must be in [5..20]</td>
+            </tr>
+            <tr>
+                <td  class="att">Date of Publicaton (Year):</td>
+                <td><input type="number" th:field="*{yearPublicaton}" /></td>
+                <td th:if="${#fields.hasErrors('yearPublicaton')}" errors="*{yearPublicaton}">year of pubblication >2024</td>
+            </tr>
+            <tr >
+                <td class="att">Price:</td>
+                <td><input type="number" th:field="*{price}" /></td>
+                <td th:if="${#fields.hasErrors('price')}" errors="*{price}">price > 1</td>
+            </tr>
+        </table>
+        <button class="btn" type="submit">Add Book</button>
+    </form>
+
+</div>
+</body>
+</html>
