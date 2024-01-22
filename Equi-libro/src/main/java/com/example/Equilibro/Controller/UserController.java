@@ -52,20 +52,29 @@ public class UserController {
     }
 
     @PostMapping("/authUser")
-    public String authUsertoBook(@RequestParam("userName") String username, @RequestParam("password") String password, HttpSession session,BindingResult bindingResult , User user) {
-       if(bindingResult.hasErrors()){
-           return "Login";
-       }
+    public String authUsertoBook(
+            @RequestParam("userName") String username,
+            @RequestParam("password") String password,
+             User user,
+            BindingResult bindingResult,
+            HttpSession session) {
 
-         user = userRepository.login(username, password);
-        if (user == null ) {
+        if (bindingResult.hasErrors()) {
+            return "Login";
+        }
+
+        user = userRepository.login(username, password);
+
+        if (user == null) {
             return "Login";
         } else {
             session.setAttribute("logged", user);
         }
+
         return "redirect:/Book/";
     }
-@GetMapping("/logout")
+
+    @GetMapping("/logout")
     public String logout (HttpSession session){
         if(session!=null){
                 session.invalidate();
