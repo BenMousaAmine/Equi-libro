@@ -19,6 +19,7 @@ import java.util.ArrayList;
 @org.springframework.stereotype.Controller
 @RequestMapping("/")
 public class UserController {
+
     @Autowired
     private UserDao userRepository ;
 
