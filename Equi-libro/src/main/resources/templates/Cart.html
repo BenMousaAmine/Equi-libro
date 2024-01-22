@@ -17,8 +17,11 @@
         <tr th:each="cart : ${carts}">
             <td th:text="${cart.book != null ? cart.book.getTitle() : 'N/A'}"></td>
             <td th:text="${cart.book != null ? cart.book.getPrice() : 'N/A'}"></td>
-            <td class="sotto"><a th:href="@{{id} (id = ${cart.getId()}) }" >Remove</a> </td>
+            <td class="sotto">
+                <a th:href="@{{id} (id = ${cart.getId()}) }">Remove</a>
+            </td>
         </tr>
+
     </table>
     <button class="btn" th:onclick="|window.location.href='/Book/'|">Home</button>
     <button class="btn" ><a href="/logout">logout</a></button>

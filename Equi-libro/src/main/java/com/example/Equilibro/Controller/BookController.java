@@ -79,24 +79,22 @@ public class BookController {
         return "Cart";
     }
 
-    @RequestMapping("/cart/remove/{id}")
+    @PostMapping ("/cart/remove/{id}")
     public String removeFromCart(@PathVariable(value = "id") Long id, Model model, HttpSession session) {
-        Cart cart = cartRepository.findById(id);
-        if (cart != null) {
-            cartRepository.delete(cart);
-            Iterator<Cart> iterator = listCart.iterator();
-            while (iterator.hasNext()) {
-                Cart c = iterator.next();
-                if (c.getId() == id) {
-                    iterator.remove();
-                    break;
-                }
-            }
+        Cart cartToRemove = cartRepository.findById(id);
+
+        if (cartToRemove != null) {
+            listCart.removeIf(cart -> cart.getId().equals(id));
+            cartRepository.delete(cartToRemove);
         }
-        model.addAttribute("carts", listCart);
+
+        model.addAttribute("carts", cartRepository.findAll());
 
         return "redirect:/Book/";
+
     }
+
+
 
 
 }
