@@ -66,9 +66,9 @@ public class BookController {
 
         return "redirect:/Book/";
     }
-@GetMapping("/cart")
-public String cart(Model model){
-        model.addAttribute("carts", cartRepository.findAll());
+            @GetMapping("/cart")
+            public String cart(Model model){
+            model.addAttribute("carts", listCart);
 
         return "Cart";}
     @GetMapping("/cart/{id}")
