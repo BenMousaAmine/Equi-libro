@@ -86,12 +86,10 @@ public class BookController {
     @GetMapping("/cart/remove/{id}")
     public String removeFromCart(@PathVariable(value = "id") Long id, Model model, HttpSession session) {
         Cart cartToRemove = cartRepository.findById(id);
-
         if (cartToRemove != null) {
             listCart.removeIf(cart -> cart.getId().equals(id));
             cartRepository.delete(cartToRemove);
         }
-
         model.addAttribute("carts", listCart);
 
         return "redirect:/Book/cart";

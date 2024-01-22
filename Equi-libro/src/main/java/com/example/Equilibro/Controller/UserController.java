@@ -30,12 +30,12 @@ public class UserController {
     }
 
 
-    @GetMapping(value = "/Registration.html")
+    @GetMapping(value = "/Registration")
     public String registerUser(User user) {
         return "Registration";
     }
 
-    @GetMapping(value = "/Login.html")
+    @GetMapping(value = "/Login")
     public String loginUser(User user) {
         return "Login";
     }
