@@ -52,12 +52,12 @@ public class UserController {
     }
 
     @PostMapping("/authUser")
-    public String authUsertoBook(@RequestParam("userName") String username, @RequestParam("password") String password, HttpSession session,BindingResult bindingResult) {
+    public String authUsertoBook(@RequestParam("userName") String username, @RequestParam("password") String password, HttpSession session,BindingResult bindingResult , User user) {
        if(bindingResult.hasErrors()){
            return "Login";
        }
 
-        User user = userRepository.login(username, password);
+         user = userRepository.login(username, password);
         if (user == null ) {
             return "Login";
         } else {
