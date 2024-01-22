@@ -67,7 +67,10 @@ public class BookController {
         return "redirect:/Book/";
     }
 @GetMapping("/cart")
-public String cart(){return "Cart";}
+public String cart(Model model){
+        model.addAttribute("carts", cartRepository.findAll());
+
+        return "Cart";}
     @GetMapping("/cart/{id}")
     public String addToCart (@PathVariable(value = "id") Long id  , Model model ,HttpSession session){
         Book book = bookReposiory.findById(id);
@@ -91,7 +94,7 @@ public String cart(){return "Cart";}
 
         model.addAttribute("carts", listCart);
 
-        return "redirect:/Book/";
+        return "redirect:/Book/cart";
     }
 
 
