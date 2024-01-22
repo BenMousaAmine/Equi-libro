@@ -52,9 +52,9 @@ public class UserController {
     }
 
     @PostMapping("/authUser")
-    public String authUsertoBook(@RequestParam("userName") String username, @RequestParam("password") String password, HttpSession session) {
+    public String authUsertoBook(@RequestParam("userName") String username, @RequestParam("password") String password, HttpSession session,BindingResult bindingResult) {
         User user = userRepository.login(username, password);
-        if (user == null) {
+        if (user == null || bindingResult.hasErrors()) {
             return "Login";
         } else {
             session.setAttribute("logged", user);
