@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/styleHome.css}" rel="stylesheet" />
+    <title>Cart</title>
+</head>
+<body>
+<div class="home">
+    <h1 class="title"> Cart </h1>
+    <table class="table">
+        <tr class="att">
+            <td>Title</td>
+            <td>Price</td>
+           <td>Remove</td>
+        </tr>
+        <tr th:each="cart : ${carts}">
+            <td th:text="${cart.book != null ? cart.book.getTitle() : 'N/A'}"></td>
+            <td th:text="${cart.book != null ? cart.book.getPrice() : 'N/A'}"></td>
+            <td class="sotto"><a th:href="@{{id} (id = ${cart.getId()}) }" >Remove</a> </td>
+        </tr>
+    </table>
+    <button class="btn" th:onclick="|window.location.href='/Book/'|">Home</button>
+    <button class="btn" ><a href="/logout">logout</a></button>
+</div>
+</body>
+</html>

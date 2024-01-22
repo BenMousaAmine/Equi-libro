@@ -26,13 +26,12 @@ public class Book {
     private String homeProduction ;
     // @NotNull
     // @Max(2024)
-    private Integer yearPublicaton ;
+    private String yearPublicaton ;
     //  @NotNull
     // @Min(1)
-    private Integer price ;
+    private Double price ;
 
-    public Book(Long id, String title, String author, String homeProduction, Integer yearPublicaton, Integer price) {
-        this.id = id;
+    public Book( String title, String author, String homeProduction, String yearPublicaton, Double price) {
         this.title = title;
         this.author = author;
         this.homeProduction = homeProduction;
@@ -56,15 +55,7 @@ public class Book {
 
                 '}';
     }
-    /*
-       @ManyToMany(mappedBy = "books")
-      @JoinTable (
-               name = "user_book"
-               , joinColumns = @JoinColumn(name = "book_id")
-               , inverseJoinColumns = @JoinColumn(name = "user_id")
-       )
-    private Set<User> users = new HashSet<>();
-*/
+
     public Long getId() {
         return id;
     }
@@ -102,18 +93,18 @@ public class Book {
         this.homeProduction = homeProduction;
     }
 
-    public Integer getYearPublicaton() {
+    public String getYearPublicaton() {
         return yearPublicaton;
     }
 
-    public void setYearPublicaton(Integer yearPublicaton) {
+    public void setYearPublicaton(String yearPublicaton) {
         this.yearPublicaton = yearPublicaton;
     }
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

@@ -8,6 +8,7 @@ import com.example.Equilibro.Dao.UserDao;
 import com.example.Equilibro.Model.Book;
 import com.example.Equilibro.Model.User;
 import com.example.Equilibro.Model.User_Book;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -56,12 +58,20 @@ import java.util.Set;
         }
 
         @GetMapping("/fetch")
-        public String fetchData() {
-            try {
-                User u = new User("Prova", "Cognome", "username", "password");
+        public String fetchData(HttpSession session  ) {
+            User u ;
+            if ( session.getAttribute("logged") == null){
+                u = new User("Prova", "Cognome", "username", "password");
                 userRepository.save(u);
                 Set<User> usrSet = new HashSet<>();
                 usrSet.add(u);
+            }else
+            {
+                u = (User) session.getAttribute("logged");
+            }
+
+            try {
+
                 BookVolume bookVolume = new BookVolume();
                 bookVolume = restTemplate.getForObject(url, BookVolume.class) ;
                 bookVolume.getItems() ;
@@ -71,20 +81,19 @@ import java.util.Set;
                     String author = (item.getVolumeInfo().getAuthors() != null && !item.getVolumeInfo().getAuthors().isEmpty()) ?
                             item.getVolumeInfo().getAuthors().get(0) : "null";
 
-                    Integer price = 50 ;
-                    Integer year = 2005 ;//Integer.valueOf(item.getVolumeInfo().getPublishedDate()) ;
+                    Double price  = item.getSaleInfo().listPrice!= null ? item.getSaleInfo().listPrice.getAmount() : 50L;
+                    String year = (item.getVolumeInfo().getPublishedDate()) ;
                     String home  = item.getVolumeInfo().getMaturityRating() ;
-                    Long id = 5L;
-                    Book book = new Book( id,title ,author , home ,year , price );
+                    Book book = new Book( title ,author , home ,year , price );
                     bookRepository.save(book);
                     userRepository.save(u);
                     User_Book userBook = new User_Book(u , book);
                     userBookRepository.save(userBook);
-                    id++ ;
+
                 }
 
 
-                return "Save Success";
+                return "Save Success Turn to home page";
 
             } catch (RestClientException e) {
                 return "Error occurred while fetching data from the API";

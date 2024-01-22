@@ -16,7 +16,7 @@
             <td>Home Production</td>
             <td>Year Pubblication</td>
             <td>Price</td>
-            <td>username</td>
+            <td>Add to Cart</td>
         </tr>
         <tr th:each="book : ${books}">
             <td class="sotto" th:text="${book.getTitle()}">book</td>
@@ -24,12 +24,13 @@
             <td class="sotto" th:text="${book.getHomeProduction()}">book</td>
             <td class="sotto" th:text="${book.getYearPublicaton()}">book</td>
             <td class="sotto" th:text="${book.getPrice()}">book</td>
+            <td class="sotto"><a th:href="@{cart/{id} (id = ${book.getId()}) }" >+</a> </td>
         </tr>
     </table>
     <table class="table">
         <tr class="att">
-            <td>user name</td>
-            <td>title</td>
+            <td>Name of publisher on this website</td>
+            <td>title of book</td>
         </tr>
         <tr th:each="ub : ${userbokk}">
             <td class="sotto" th:text="${ub.getUser().getName()}">book</td>
@@ -38,7 +39,8 @@
         </tr>
     </table>
     <button class="btn"><a href="AddBook.html">Add Book</a></button>
-    <button class ="btn"> <a href="details/{title}">details </a></button>
+    <button class="btn"><a href="Cart">Cart</a></button>
+    <button class="btn" ><a href="/logout">logout</a></button>
 </div>
 </body>
 </html>

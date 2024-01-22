@@ -389,7 +389,7 @@ public class Item {
         private String country;
         private String saleability;
         private boolean isEbook;
-        private ListPrice listPrice;
+        public ListPrice listPrice;
         private RetailPrice retailPrice;
         private String buyLink;
         private List<Offer> offers;
@@ -397,7 +397,15 @@ public class Item {
         // Getters and setters for all fields
 
         public static class ListPrice {
-            private double amount;
+            public double getAmount() {
+                return amount;
+            }
+
+            public void setAmount(double amount) {
+                this.amount = amount;
+            }
+
+            public double amount;
             private String currencyCode;
 
             // Getters and setters for all fields
